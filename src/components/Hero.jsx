@@ -15,7 +15,10 @@ const Hero = () => {
   return (
     <section className="text-center p-10">
       <h2 className="text-3xl font-bold mb-4">Bienvenue sur ma page React !</h2>
-      <p className="text-gray-700 mb-4">Explore les fonctionnalités interactives.</p>
+      <p className="text-700 mb-4">Explore les fonctionnalités interactives.</p>
+      <p className="mb-4">
+        Vous êtes actuellement en mode {darkMode ? "sombre" : "clair"}.
+      </p>
       <button
         onClick={() => setCount(count + 1)}
         className="bg-blue-600 text-white px-6 py-2 rounded-lg shadow-md hover:bg-blue-700 transition"
