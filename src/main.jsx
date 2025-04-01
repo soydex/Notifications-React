@@ -7,7 +7,7 @@ import "./styles/global.css"; // Assure-toi d’avoir le CSS global (inclut Tail
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <div className="flex">
-      <Sidebar /> {/* Ajout de la Sidebar */}
+      <Sidebar />
       <HomePage />
     </div>
   </StrictMode>,
