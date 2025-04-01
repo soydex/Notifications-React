@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Ajoutez ici vos styles personnalisés si nécessaire */
-
 html {
     transition: all 0.6s ease-in-out;
 }
@@ -20,5 +18,5 @@ html.dark {
     color: white;
     height: 100vh;
     padding: 1rem;
-    /*position: fixed;*/
+    position: fixed;
 }
