@@ -1,69 +1,97 @@
-# React + TypeScript + Vite
+# Système de Notifications - Guide d'utilisation
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Composants créés
 
-Currently, two official plugins are available:
+### 1. `Notification` - Notification avec animation (style Home.tsx)
+Notification toast avec animation de disparition automatique, positionnée en bas à droite.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 2. `SimpleNotification` - Notification simple (style Admin.tsx)
+Notification inline simple avec disparition automatique après 5 secondes.
 
-## Expanding the ESLint configuration
+### 3. `useNotification` - Hook pour les notifications animées
+Hook personnalisé pour gérer les notifications avec animation.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 4. `useSimpleNotification` - Hook pour les notifications simples
+Hook personnalisé pour gérer les notifications simples.
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Utilisation
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+### Pour remplacer le système dans Home.tsx :
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```javascript
+import React from "react";
+import useNotification from "../hooks/useNotification";
+import Notification from "../components/Notification";
+
+function Home() {
+  const { notification, showNotification, hideNotification } = useNotification();
+
+  // Utilisation
+  const handleSomeAction = () => {
+    // Pour une notification de succès
+    showNotification("Action réussie !", "success");
+    
+    // Pour une notification d'erreur
+    showNotification("Erreur lors de l'action", "error");
+  };
+
+  return (
+    <div>
+      {/* Votre contenu */}
+      
+      {/* Notification Toast */}
+      <Notification 
+        notification={notification} 
+        onClose={hideNotification} 
+      />
+    </div>
+  );
+}
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Pour remplacer le système dans Admin.tsx :
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```javascript
+import React from "react";
+import useSimpleNotification from "../hooks/useSimpleNotification";
+import SimpleNotification from "../components/SimpleNotification";
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+function Admin() {
+  const { notification, showNotification, hideNotification } = useSimpleNotification();
+
+  // Utilisation
+  const handleSomeAction = () => {
+    // Pour une notification de succès
+    showNotification("Action réussie !", "success");
+    
+    // Pour une notification d'erreur
+    showNotification("Erreur lors de l'action", "error");
+  };
+
+  return (
+    <div>
+      {/* Notifications */}
+      <SimpleNotification notification={notification} />
+      
+      {/* Votre contenu */}
+    </div>
+  );
+}
 ```
+
+## Avantages du nouveau système
+
+1. **Réutilisabilité** : Les composants peuvent être utilisés dans n'importe quelle page
+2. **Consistance** : Même comportement dans toute l'application
+3. **Maintenabilité** : Code centralisé, plus facile à modifier
+4. **Personnalisation** : Facilement extensible pour ajouter de nouveaux types
+5. **Clean Code** : Sépare la logique de notification du reste du composant
+
+## Types de notifications supportés
+
+- `"success"` : Notification verte (par défaut)
+- `"error"` : Notification rouge
+
+## Personnalisation
+
+Pour ajouter de nouveaux types de notifications, modifiez les composants et ajoutez les styles CSS correspondants.
