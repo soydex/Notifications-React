@@ -1,10 +1,95 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <!-- Favicon par défaut (thème clair) -->
+    <link rel="icon" type="image/svg+xml" href="/notification_light.svg" />
+    <!-- Favicon pour le thème sombre -->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/notification_dark.svg"
+      media="(prefers-color-scheme: dark)"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
+    <title>Simple Notification</title>
+
+    <!-- Meta SEO essentiels -->
+    <title>Système de Notifications - Guide d'utilisation</title>
+    <meta
+      name="description"
+      content="Découvrez comment utiliser le système de notifications avec des composants réutilisables et des hooks personnalisés pour une expérience utilisateur optimale."
+    />
+    <meta
+      name="keywords"
+      content="notifications React, react notifs, composants notifications react"
+    />
+    <meta name="author" content="Nom de l'auteur" />
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    />
+    <link rel="canonical" href="https://soydex.github.io/Notifications-React" />
+
+    <!-- Open Graph (Facebook, LinkedIn) -->
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Système de Notifications - Guide d'utilisation"
+    />
+    <meta
+      property="og:description"
+      content="Apprenez à intégrer des notifications animées et simples dans vos projets React avec des exemples pratiques."
+    />
+    <meta property="og:url" content="https://soydex.github.io/Notifications-React" />
+    <meta property="og:site_name" content="Système de Notifications" />
+    <meta
+      property="og:image"
+      content="https://soydex.github.io/Notifications-React/vite.svg"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="fr_FR" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@votre_compte" />
+    <meta name="twitter:creator" content="@auteur_compte" />
+    <meta name="twitter:title" content="Système de Notifications - Guide" />
+    <meta
+      name="twitter:description"
+      content="Tutoriel complet pour intégrer des notifications dans vos projets React."
+    />
+    <meta
+      name="twitter:image"
+      content="https://soydex.github.io/Notifications-React/vite.svg"
+    />
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Titre de la page",
+        "description": "Description de la page",
+        "url": "https://soydex.github.io/Notifications-React",
+        "author": {
+          "@type": "Person",
+          "name": "Nom de l'auteur"
+        },
+        "datePublished": "2025-07-21",
+        "dateModified": "2025-07-21"
+      }
+    </script>
+
+    <!-- Optimisation technique -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- DNS Prefetch pour les performances -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="//www.google-analytics.com" />
   </head>
   <body>
     <div id="root"></div>
