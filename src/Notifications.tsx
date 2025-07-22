@@ -200,7 +200,7 @@ const TestNotifications = () => {
           <h2 className="text-xl font-semibold mb-4">
             Type de notification à tester
           </h2>
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-4">
             <button
               onClick={() => setActiveTest("animated")}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
@@ -241,7 +241,7 @@ const TestNotifications = () => {
               : "Test Notifications Simples"}
           </h2>
 
-          <div className="grid grid-cols-2 gap-4 mb-6">
+          <div className="grid grid-wrap grid-cols-2 gap-4 mb-6">
             <button
               onClick={() => {
                 if (activeTest === "animated") {
