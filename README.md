@@ -1,4 +1,15 @@
-# Système de Notifications - Guide d'utilisation
+# @soydex/react-notifications
+
+Un système de notifications moderne et flexible pour React, avec support de TailwindCSS.
+
+## Fonctionnalités
+
+- 🎯 Deux types de notifications : toast animé et inline
+- 🎨 Styles Tailwind CSS préconfigurés
+- 🔧 Personnalisable et extensible
+- 📦 Léger et performant
+- 🌟 Support de React 18+
+- 📱 Responsive et accessible
 
 ## Composants créés
 

@@ -1,0 +1,28 @@
+# Source
+src/
+public/
+
+# Configuration
+.eslintrc.js
+.prettierrc
+tsconfig.json
+tsconfig.*.json
+vite.config.ts
+
+# Tests
+tests/
+coverage/
+*.test.ts
+*.test.tsx
+
+# Development
+.vscode/
+.github/
+.gitignore
+.env*
+*.log
+
+# Build
+dist-ssr/
+*.local
+node_modules/

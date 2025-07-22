@@ -98,8 +98,8 @@ const Notification: React.FC<NotificationProps> = ({
       <div
         className={`flex items-center gap-3 px-4 py-3 rounded-lg shadow-lg min-w-[300px] ${
           notification.type === "success"
-            ? "bg-green-500 text-white"
-            : "bg-red-500 text-white"
+            ? "bg-green-500/80 text-white"
+            : "bg-red-500/50 text-white"
         }`}
       >
         {notification.type === "success" ? (

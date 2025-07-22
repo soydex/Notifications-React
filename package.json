@@ -1,12 +1,29 @@
 {
-  "name": "my-notifications-app",
-  "private": true,
-  "version": "0.0.0",
+  "name": "@soydex/react-notifications",
+  "version": "1.0.0",
+  "description": "Un système de notifications moderne et flexible pour React",
   "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
-    "deploy": "gh-pages -d dist"
+    "build": "tsc && vite build",
+    "prepare": "npm run build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "test": "echo \"Aucun test pour le moment\"",
+    "clean": "rimraf dist"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.11",
@@ -17,6 +34,8 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.30.1",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/react-hooks": "^8.0.1",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "@vitejs/plugin-react": "^4.6.0",
@@ -25,8 +44,11 @@
     "eslint-plugin-react-refresh": "^0.4.20",
     "gh-pages": "^6.3.0",
     "globals": "^16.3.0",
+    "rimraf": "^6.0.1",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.35.1",
-    "vite": "^7.0.4"
+    "vite": "^7.0.4",
+    "vite-plugin-lib-inject-css": "^2.2.2",
+    "vitest": "^3.2.4"
   }
 }
