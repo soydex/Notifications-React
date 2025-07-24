@@ -76,44 +76,124 @@ const Notification: React.FC<NotificationProps> = ({
   notification,
   onClose,
 }) => {
+  const [fadeOut, setFadeOut] = useState(false);
+  const [progress, setProgress] = useState(100);
+
   React.useEffect(() => {
     if (notification && notification.show) {
-      const timer = setTimeout(() => {
-        onClose();
-      }, 4000);
-      return () => clearTimeout(timer);
+      setFadeOut(false);
+      setProgress(100);
+
+      // Animation de la barre de progression
+      const progressInterval = setInterval(() => {
+        setProgress((prev) => {
+          if (prev <= 0) {
+            clearInterval(progressInterval);
+            return 0;
+          }
+          return prev - 100 / 30;
+        });
+      }, 100);
+
+      const fadeTimer = setTimeout(() => {
+        setFadeOut(true);
+
+        const hideTimer = setTimeout(() => {
+          onClose();
+        }, 500);
+
+        return () => clearTimeout(hideTimer);
+      }, 2500);
+
+      return () => {
+        clearTimeout(fadeTimer);
+        clearInterval(progressInterval);
+      };
     }
   }, [notification, onClose]);
 
-  if (!notification) return null;
+  const handleClose = () => {
+    setFadeOut(true);
+    setTimeout(() => {
+      onClose();
+    }, 500);
+  };
+
+  if (!notification || !notification.show) {
+    return null;
+  }
 
   return (
     <div
-      className={`fixed bottom-4 right-4 z-50 transform transition-all duration-300 ${
-        notification.show
-          ? "translate-y-0 opacity-100"
-          : "translate-y-full opacity-0"
-      }`}
+      className={`fixed bottom-4 right-2 sm:right-4 rounded-lg shadow-lg ${
+        notification.type === "success" ? "bg-green-600/70" : "bg-red-600/70"
+      } text-white transition-all duration-500 transform z-50 text-sm sm:text-base overflow-hidden
+      ${fadeOut ? "opacity-0" : "opacity-100"}`}
     >
-      <div
-        className={`flex items-center gap-3 px-4 py-3 rounded-lg shadow-lg min-w-[300px] ${
-          notification.type === "success"
-            ? "bg-green-500 text-white"
-            : "bg-red-500 text-white"
-        }`}
-      >
-        {notification.type === "success" ? (
-          <CheckCircle className="w-5 h-5" />
-        ) : (
-          <XCircle className="w-5 h-5" />
-        )}
-        <span className="flex-1">{notification.message}</span>
-        <button
-          onClick={onClose}
-          className="text-white hover:text-gray-200 transition-colors"
-        >
-          ×
-        </button>
+      <div className="px-4 sm:px-6 py-3">
+        <div className="flex items-center justify-between space-x-3">
+          <div className="flex items-center space-x-2">
+            {notification.type === "success" ? (
+              <svg
+                className="w-6 h-6 flex-shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+            ) : (
+              <svg
+                className="w-6 h-6 flex-shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            )}
+            <span>{notification.message}</span>
+          </div>
+
+          {/* Bouton de fermeture */}
+          <button
+            onClick={handleClose}
+            className="flex-shrink-0 p-1 hover:bg-white/20 rounded-full transition-colors duration-200"
+            aria-label="Fermer la notification"
+          >
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      {/* Barre de progression */}
+      <div className="h-1 bg-white/20 w-full">
+        <div
+          className="h-1 bg-white transition-all duration-100 ease-linear"
+          style={{ width: `${progress}%` }}
+        />
       </div>
     </div>
   );
@@ -336,30 +416,28 @@ const TestNotifications = () => {
         </div>
 
         {/* Documentation live */}
-        <div className="bg-gray-800 text-gray-100 rounded-lg p-6 mt-6">
+        <div className="bg-white dark:bg-zinc-700 dark:text-gray-100 shadow-md dark:border-gray-700 dark:border rounded-lg p-6 mt-6">
           <h3 className="text-lg font-semibold mb-3">
             Code d'exemple en cours :
           </h3>
           <pre className="text-sm overflow-x-auto">
             <code>
               {activeTest === "animated"
-                ? `// Style Home.tsx - Notification animée
-const { notification, showNotification, hideNotification } = useNotification();
-
-showNotification("Message de succès", "success");
-showNotification("Message d'erreur", "error");
-
-<Notification 
-  notification={notification} 
-  onClose={hideNotification} 
-/>`
-                : `// Style Admin.tsx - Notification simple
-const { notification, showNotification } = useSimpleNotification();
-
-showNotification("Message de succès", "success");
-showNotification("Message d'erreur", "error");
-
-<SimpleNotification notification={notification} />`}
+                ? <div className="flex items-center gap-2">
+                  <img
+                  src="code_home_tsx.svg"
+                  alt="Code Home.tsx"
+                  className="rounded-md shadow-sm"
+                />
+                </div>
+                : <div className="flex items-center gap-2">
+                  <img
+                    src="code_admin_tsx.svg"
+                    alt="Code Admin.tsx"
+                    className="rounded-md shadow-sm"
+                  />
+                </div>
+              }
             </code>
           </pre>
         </div>
